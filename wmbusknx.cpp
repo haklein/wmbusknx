@@ -9,18 +9,16 @@
 
 #include <eibclient.h>
 
-
 #include "Telegram.h"
 
 EIBConnection *eibcon;
 
-
 bool sendTelegram(EIBConnection *eibcon, std::string ga, uint32_t value) {
-    Telegram *tg = new Telegram();
-    tg->setGroupAddress(Telegram::stringtogaddr(ga));
-    uint32_t converted = __builtin_bswap32(value);
-    tg->setUserData((const unsigned char *)&converted, 4);
-    return tg->sendTo(eibcon);
+	Telegram *tg = new Telegram();
+	tg->setGroupAddress(Telegram::stringtogaddr(ga));
+	uint32_t converted = __builtin_bswap32(value);
+	tg->setUserData((const unsigned char *)&converted, 4);
+	return tg->sendTo(eibcon);
 }
 
 
